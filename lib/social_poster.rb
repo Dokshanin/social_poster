@@ -4,13 +4,13 @@ $:.push File.expand_path("../lib", __FILE__)
 
 require_relative 'social_poster/version'
 require_relative 'social_poster/helper'
-[:vkontakte, :facebook, :live_journal, :twitter].each do |p|
+[:vkontakte, :facebook, :twitter].each do |p|
   require_relative "social_poster/poster/#{p}"
 end
 
 module SocialPoster
 
-  @@fb = @@lj = @@twitter = @@vk = {}
+  @@fb = @@twitter = @@vk = {}
 
   def self.setup
     yield self
@@ -19,7 +19,6 @@ module SocialPoster
   def self.get_config(name)
     { 
       facebook:    @@fb,
-      livejournal: @@lj,
       vkontakte:   @@vk,
       twitter:     @@twitter
     }[name.to_sym]
@@ -27,10 +26,6 @@ module SocialPoster
 
   def self.fb(value)
     @@fb = value
-  end
-
-  def self.lj(value)
-    @@lj = value
   end
 
   def self.vk(value)
@@ -49,8 +44,6 @@ module SocialPoster
       site = Poster::Vkontakte.new(options)
     when :twitter
       site = Poster::Twitter.new
-    when :lj
-      site = Poster::LiveJournal.new
     else
       raise "Unknown network #{network}"
     end
