@@ -25,19 +25,19 @@ module SocialPoster
     }[name.to_sym]
   end
 
-  def self.fb value
+  def self.fb(value)
     @@fb = value
   end
 
-  def self.lj value
+  def self.lj(value)
     @@lj = value
   end
 
-  def self.vk value
+  def self.vk(value)
     @@vk = value
   end
 
-  def self.twitter value
+  def self.twitter(value)
     @@twitter = value
   end
 
